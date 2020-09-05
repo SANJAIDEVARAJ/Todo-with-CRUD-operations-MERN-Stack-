@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 });
 
 
-//Loads the tasks
+//Reads the tasks
 todoRoutes.route("/").get(function (req, res) {
   Todo.find(function (err, todos) {
     if (err) {
@@ -49,7 +49,7 @@ todoRoutes.route("/:id").get(function (req, res) {
   });
 });
 
-//Adds the tasks
+//Creating the tasks
 todoRoutes.route("/add").post(function (req, res) {
   console.log(req);
   let todo = new Todo(req.body);
