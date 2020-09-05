@@ -30,6 +30,8 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
+
+//Loads the tasks
 todoRoutes.route("/").get(function (req, res) {
   Todo.find(function (err, todos) {
     if (err) {
@@ -47,6 +49,7 @@ todoRoutes.route("/:id").get(function (req, res) {
   });
 });
 
+//Adds the tasks
 todoRoutes.route("/add").post(function (req, res) {
   console.log(req);
   let todo = new Todo(req.body);
@@ -60,6 +63,8 @@ todoRoutes.route("/add").post(function (req, res) {
     });
 });
 
+
+//Updating the tasks
 todoRoutes.route("/update/:id").post(function (req, res) {
   Todo.findById(req.params.id, function (err, todo) {
     if (!todo) res.status(404).send("data is not found");
@@ -79,6 +84,8 @@ todoRoutes.route("/update/:id").post(function (req, res) {
   });
 });
 
+
+//Deleting the tasks
 todoRoutes.route("/").delete((req, res) => {
   Todo.deleteOne({ _id: req.query.id }, (err) => {
     if (err) {
